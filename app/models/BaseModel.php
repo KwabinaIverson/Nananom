@@ -1,11 +1,8 @@
 <?php
 namespace App\Models;
 
-// Import necessary classes
-require 'vendor/autoload.php';
-
 use Ramsey\Uuid\Uuid;
-
+use App\Core\Database;
 /**
  * Abstract BaseModel
  *
@@ -20,6 +17,7 @@ abstract class BaseModel implements \JsonSerializable
     protected $id;
     protected $created_at;
     protected $updated_at;
+    protected Database $db;
 
     /**
      * Constructor for BaseModel.
@@ -32,6 +30,7 @@ abstract class BaseModel implements \JsonSerializable
         $this->id = Uuid::uuid4()->toString();
         $this->created_at = date('Y-m-d H:i:s');
         $this->updated_at = date('Y-m-d H:i:s');
+        $this->db = new Database();
     }
 
     /**
@@ -62,6 +61,24 @@ abstract class BaseModel implements \JsonSerializable
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+    public function setCreatedAt(string $createdAt): self
+    {
+        $this->created_at = $createdAt;
+        return $this;
+    }
+
+    public function setUpdatedAt(string $updatedAt): self
+    {
+        $this->updated_at = $updatedAt;
+        return $this;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**

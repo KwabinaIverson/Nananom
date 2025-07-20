@@ -7,7 +7,7 @@
     # Example: If your project is at http://localhost/nananom-farms/public/
     # then use /nananom-farms/public/
     # If your public folder is directly the web server's document root (e.g., http://localhost/), use /
-    RewriteBase /NANANOM FARM/public/
+    RewriteBase /NANANOM/public/
 
     # Check if the requested path is not an existing directory
     RewriteCond %{REQUEST_FILENAME} !-d
