@@ -63,8 +63,7 @@ class ServiceModel extends BaseModel
             ':updatedAt' => $this->getUpdatedAt()
         ];
 
-        // return $this->db->execute($sql, $params);
-        return true;
+        return $this->db->execute($sql, $params);
     }
 
     /**
@@ -73,29 +72,28 @@ class ServiceModel extends BaseModel
      */
     public function update(): bool
     {
-        // $this->updatedAt = date('Y-m-d H:i:s');
+        $this->setUpdatedAt(date('Y-m-d H:i:s'));
 
-        // $sql = "UPDATE {$this->tableName} SET
-        //             ServiceName = :serviceName,
-        //             Description = :description,
-        //             Price = :price,
-        //             DurationMinutes = :durationMinutes,
-        //             IsActive = :isActive,
-        //             UpdatedAt = :updatedAt
-        //         WHERE ServiceID = :id";
+        $sql = "UPDATE {$this->tableName} SET
+                    ServiceName = :serviceName,
+                    Description = :description,
+                    Price = :price,
+                    DurationMinutes = :durationMinutes,
+                    IsActive = :isActive,
+                    UpdatedAt = :updatedAt
+                WHERE ServiceID = :id";
 
-        // $params = [
-        //     ':serviceName' => $this->serviceName,
-        //     ':description' => $this->description,
-        //     ':price' => $this->price,
-        //     ':durationMinutes' => $this->durationMinutes,
-        //     ':isActive' => $this->isActive,
-        //     ':updatedAt' => $this->getUpdatedAt(),
-        //     ':id' => $this->id
-        // ];
+        $params = [
+            ':serviceName' => $this->serviceName,
+            ':description' => $this->description,
+            ':price' => $this->price,
+            ':durationMinutes' => $this->durationMinutes,
+            ':isActive' => $this->isActive,
+            ':updatedAt' => $this->getUpdatedAt(),
+            ':id' => $this->id
+        ];
 
-        // return $this->db->execute($sql, $params);
-        return true; // For now, we assume the update operation is successful
+        return $this->db->execute($sql, $params);
     }
 
     /**
@@ -103,34 +101,56 @@ class ServiceModel extends BaseModel
      * @param string $id The UUID of the service to find.
      * @return static|null The ServiceModel instance if found, null otherwise.
      */
-    // public static function find(string $id): ?static
-    // {
-    //     $instance = new static();
-    //     $sql = "SELECT * FROM {$instance->tableName} WHERE ServiceID = :id LIMIT 1";
-    //     $params = [':id' => $id];
-    //     $result = $instance->db->fetch($sql, $params);
+    public static function find(string $id): ?static
+    {
+        $instance = new static();
+        $sql = "SELECT * FROM {$instance->tableName} WHERE ServiceID = :id LIMIT 1";
+        $params = [':id' => $id];
+        $result = $instance->db->fetch($sql, $params);
 
-    //     if ($result) {
-    //         return $instance
-    //             ->setId($result['ServiceID'])
-    //             ->setServiceName($result['ServiceName'])
-    //             ->setDescription($result['Description'])
-    //             ->setPrice($result['Price'])
-    //             ->setDurationMinutes($result['DurationMinutes'])
-    //             ->setIsActive($result['IsActive'])
-    //             ->setCreatedAt($result['CreatedAt'])
-    //             ->setUpdatedAt($result['UpdatedAt']);
-    //     }
-    //     return null;
-    // }
+        if ($result) {
+            return $instance
+                ->setId($result['ServiceID'])
+                ->setServiceName($result['ServiceName'])
+                ->setDescription($result['Description'])
+                ->setPrice($result['Price'])
+                ->setDurationMinutes($result['DurationMinutes'])
+                ->setIsActive($result['IsActive'])
+                ->setCreatedAt($result['CreatedAt'])
+                ->setUpdatedAt($result['UpdatedAt']);
+        }
+        return null;
+    }
 
     /**
      * Retrieves all service records from the database.
-     * @return array An array of ServiceModel instances.
+     *
+     * @return array An array of ServiceModel instances. Returns an empty array if no services are found.
      */
-    public static function all(): void
+    public static function all(): array
     {
-        var_dump("Fetching all services... This is the all function in ServiceModel.");
+        $instance = new static();
+        $sql = "SELECT * FROM {$instance->tableName}";
+        $results = $instance->db->fetchAll($sql);
+
+        // Ensure $results is an array, even if fetchAll returns null or false (though typically it returns empty array for no rows)
+        if (!is_array($results)) {
+            $results = [];
+        }
+
+        $services = [];
+        foreach ($results as $result) {
+            $services[] = (new static())
+                ->setId($result['ServiceID'])
+                ->setServiceName($result['ServiceName'])
+                ->setDescription($result['Description'])
+                ->setPrice((float)$result['Price'])
+                ->setDurationMinutes((int)$result['DurationMinutes'])
+                ->setIsActive((bool)$result['IsActive'])
+                ->setCreatedAt($result['CreatedAt'])
+                ->setUpdatedAt($result['UpdatedAt']);
+        }
+        return $services;
     }
 
     /**
@@ -138,12 +158,12 @@ class ServiceModel extends BaseModel
      * @param string $id The UUID of the service to delete.
      * @return bool True on success, false on failure.
      */
-    // public static function delete(string $id): bool
-    // {
-    //     $instance = new static();
-    //     $sql = "DELETE FROM {$instance->tableName} WHERE ServiceID = :id";
-    //     $params = [':id' => $id];
-    //     return $instance->db->execute($sql, $params);
-    // }
+    public static function delete(string $id): bool
+    {
+        $instance = new static();
+        $sql = "DELETE FROM {$instance->tableName} WHERE ServiceID = :id";
+        $params = [':id' => $id];
+        return $instance->db->execute($sql, $params);
+    }
 }
 ?>

@@ -53,11 +53,11 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
 
     // GET /api/services - Lists all services
-    $r->addRoute('GET', '/api/services', 'ServiceController@index');
-    $r->addRoute('GET', '/api/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@show');
-    $r->addRoute('POST', '/api/services', 'ServiceController@store');
-    $r->addRoute('PUT', '/api/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@update');
-    $r->addRoute('DELETE', '/api/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@delete');
+    $r->addRoute('GET', '/api/services', 'ServiceController@getServices');
+    $r->addRoute('GET', '/api/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@getService');
+    $r->addRoute('POST', '/api/admin/services', 'ServiceController@createService');
+    $r->addRoute('PUT', '/api/admin/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@updateService');
+    $r->addRoute('DELETE', '/api/admin/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@deleteService');
 
 
     // Admin Panel Routes (Example - you'll add more here)

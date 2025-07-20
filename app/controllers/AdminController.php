@@ -120,7 +120,7 @@ class AdminController
 
     /**
      * Handles POST /admin/users
-     * Creates a new user (admin/support agent/customer) via API.
+     * Creates a new user (admin/support agent) via API.
      * Expects JSON input and returns JSON response.
      */
     public function register(): void
