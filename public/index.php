@@ -51,6 +51,14 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/api/login', 'AuthController@login');
     $r->addRoute('GET', '/api/logout', 'AuthController@logout');
 
+    // --- API Routes for Appointments ---
+    $r->addRoute('GET', '/api/appointments', 'AppointmentController@getAppointments');
+    $r->addRoute('GET', '/api/appointments/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'AppointmentController@getAppointment');
+    $r->addRoute('POST', '/api/appointments', 'AppointmentController@createAppointment');
+    $r->addRoute('PUT', '/api/appointments/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'AppointmentController@updateAppointment');
+    $r->addRoute('DELETE', '/api/appointments/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'AppointmentController@deleteAppointment');
+
+
 
     // GET /api/services - Lists all services
     $r->addRoute('GET', '/api/services', 'ServiceController@getServices');
@@ -58,6 +66,15 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/api/admin/services', 'ServiceController@createService');
     $r->addRoute('PUT', '/api/admin/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@updateService');
     $r->addRoute('DELETE', '/api/admin/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@deleteService');
+
+
+    // --- API Routes for Enquiries ---
+    $r->addRoute('GET', '/api/enquiries', 'EnquiryController@getEnquiries');
+    $r->addRoute('GET', '/api/enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@getEnquiry');
+    $r->addRoute('POST', '/api/create_enquiries', 'EnquiryController@createEnquiry');
+    $r->addRoute('PUT', '/api/enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@update');
+    $r->addRoute('DELETE', '/api/enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@delete');
+
 
 
     // Admin Panel Routes (Example - you'll add more here)

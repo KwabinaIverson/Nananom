@@ -18,8 +18,6 @@ class ServiceModel extends BaseModel
 
     protected string $serviceName;
     protected string $description;
-    protected float $price;
-    protected int $durationMinutes;
     protected bool $isActive;
 
     public function __construct()
@@ -30,15 +28,11 @@ class ServiceModel extends BaseModel
     // --- Getters ---
     public function getServiceName(): string { return $this->serviceName; }
     public function getDescription(): string { return $this->description; }
-    public function getPrice(): float { return $this->price; }
-    public function getDurationMinutes(): int { return $this->durationMinutes; }
     public function getIsActive(): bool { return $this->isActive; }
 
     // --- Setters ---
     public function setServiceName(string $serviceName): self { $this->serviceName = $serviceName; return $this; }
     public function setDescription(string $description): self { $this->description = $description; return $this; }
-    public function setPrice(float $price): self { $this->price = $price; return $this; }
-    public function setDurationMinutes(int $durationMinutes): self { $this->durationMinutes = $durationMinutes; return $this; }
     public function setIsActive(bool $isActive): self { $this->isActive = $isActive; return $this; }
 
     /**
@@ -49,15 +43,13 @@ class ServiceModel extends BaseModel
     {
         $this->id = self::getId();
 
-        $sql = "INSERT INTO {$this->tableName} (ServiceID, ServiceName, Description, Price, DurationMinutes, IsActive, CreatedAt, UpdatedAt)
-                VALUES (:id, :serviceName, :description, :price, :durationMinutes, :isActive, :createdAt, :updatedAt)";
+        $sql = "INSERT INTO {$this->tableName} (ServiceID, ServiceName, Description, IsActive, CreatedAt, UpdatedAt)
+                VALUES (:id, :serviceName, :description, :isActive, :createdAt, :updatedAt)";
 
         $params = [
             ':id' => $this->id,
             ':serviceName' => $this->serviceName,
             ':description' => $this->description,
-            ':price' => $this->price,
-            ':durationMinutes' => $this->durationMinutes,
             ':isActive' => $this->isActive,
             ':createdAt' => $this->getCreatedAt(),
             ':updatedAt' => $this->getUpdatedAt()
@@ -77,8 +69,6 @@ class ServiceModel extends BaseModel
         $sql = "UPDATE {$this->tableName} SET
                     ServiceName = :serviceName,
                     Description = :description,
-                    Price = :price,
-                    DurationMinutes = :durationMinutes,
                     IsActive = :isActive,
                     UpdatedAt = :updatedAt
                 WHERE ServiceID = :id";
@@ -86,8 +76,6 @@ class ServiceModel extends BaseModel
         $params = [
             ':serviceName' => $this->serviceName,
             ':description' => $this->description,
-            ':price' => $this->price,
-            ':durationMinutes' => $this->durationMinutes,
             ':isActive' => $this->isActive,
             ':updatedAt' => $this->getUpdatedAt(),
             ':id' => $this->id
@@ -113,8 +101,6 @@ class ServiceModel extends BaseModel
                 ->setId($result['ServiceID'])
                 ->setServiceName($result['ServiceName'])
                 ->setDescription($result['Description'])
-                ->setPrice($result['Price'])
-                ->setDurationMinutes($result['DurationMinutes'])
                 ->setIsActive($result['IsActive'])
                 ->setCreatedAt($result['CreatedAt'])
                 ->setUpdatedAt($result['UpdatedAt']);
@@ -144,8 +130,6 @@ class ServiceModel extends BaseModel
                 ->setId($result['ServiceID'])
                 ->setServiceName($result['ServiceName'])
                 ->setDescription($result['Description'])
-                ->setPrice((float)$result['Price'])
-                ->setDurationMinutes((int)$result['DurationMinutes'])
                 ->setIsActive((bool)$result['IsActive'])
                 ->setCreatedAt($result['CreatedAt'])
                 ->setUpdatedAt($result['UpdatedAt']);

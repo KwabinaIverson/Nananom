@@ -35,8 +35,6 @@ CREATE TABLE IF NOT EXISTS `Service` (
     `ServiceID` VARCHAR(36) PRIMARY KEY COMMENT 'Unique identifier for the service (UUID)',
     `ServiceName` VARCHAR(255) NOT NULL COMMENT 'Name of the service (e.g., Palm Oil Delivery, Farm Consultation)',
     `Description` TEXT COMMENT 'Detailed description of the service',
-    `Price` DECIMAL(10, 2) DEFAULT 0.00 COMMENT 'Cost of the service (if applicable)',
-    `DurationMinutes` INT DEFAULT 0 COMMENT 'Estimated duration of the service/appointment in minutes',
     `IsActive` BOOLEAN DEFAULT TRUE COMMENT 'Flag to indicate if the service is currently offered (TRUE/FALSE)',
     `CreatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp when the service was added',
     `UpdatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp when the service details were last updated'
@@ -64,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `Appointment` (
 -- EnquiryID is a VARCHAR(36) to store UUIDs as primary keys.
 CREATE TABLE IF NOT EXISTS `Enquiry` (
     `EnquiryID` VARCHAR(36) PRIMARY KEY COMMENT 'Unique identifier for the enquiry (UUID)',
+    `UserID` VARCHAR(36) NULL COMMENT 'Foreign key linking to the User who made the enquiry (NULL for unauthenticated enquiries)',
     `Name` VARCHAR(255) NOT NULL COMMENT 'Name of the person making the enquiry',
     `Email` VARCHAR(255) NOT NULL COMMENT 'Email of the person making the enquiry',
     `PhoneNumber` VARCHAR(20) COMMENT 'Phone number of the person making the enquiry',

@@ -37,8 +37,6 @@ class ServiceController
                 'id' => $service->getId(),
                 'serviceName' => $service->getServiceName(),
                 'description' => $service->getDescription(),
-                'price' => (float)$service->getPrice(),
-                'durationMinutes' => (int)$service->getDurationMinutes(),
                 'isActive' => (bool)$service->getIsActive(),
                 'createdAt' => $service->getCreatedAt(),
                 'updatedAt' => $service->getUpdatedAt(),
@@ -65,8 +63,6 @@ class ServiceController
                 'id' => $service->getId(),
                 'serviceName' => $service->getServiceName(),
                 'description' => $service->getDescription(),
-                'price' => (float)$service->getPrice(),
-                'durationMinutes' => (int)$service->getDurationMinutes(),
                 'isActive' => (bool)$service->getIsActive(),
                 'createdAt' => $service->getCreatedAt(),
                 'updatedAt' => $service->getUpdatedAt(),
@@ -113,8 +109,6 @@ class ServiceController
 
         $serviceName = trim($data['serviceName']);
         $description = trim($data['description']);
-        $price = $data['price'] ?? 0.0;
-        $durationMinutes = $data['durationMinutes'] ?? 0;
         $isActive = $data['isActive'] ?? true;
 
         // Further validation (e.g., data types, ranges)
@@ -128,16 +122,6 @@ class ServiceController
             echo json_encode(['status' => 'error', 'message' => 'Description is required and must be a string.']);
             return;
         }
-        if (!is_numeric($price) || $price < 0) {
-            http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'Price must be a non-negative number.']);
-            return;
-        }
-        if (!is_int($durationMinutes) || $durationMinutes < 0) {
-            http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'Duration must be a non-negative integer.']);
-            return;
-        }
         if (!is_bool($isActive)) {
             http_response_code(400);
             echo json_encode(['status' => 'error', 'message' => 'IsActive must be a boolean.']);
@@ -149,8 +133,6 @@ class ServiceController
         $newService = new ServiceModel();
         $newService->setServiceName($serviceName);
         $newService->setDescription($description);
-        $newService->setPrice((float)$price);
-        $newService->setDurationMinutes((int)$durationMinutes);
         $newService->setIsActive((bool)$isActive);
 
         if ($newService->save()) {
@@ -159,8 +141,6 @@ class ServiceController
                 'id' => $newService->getId(),
                 'serviceName' => $newService->getServiceName(),
                 'description' => $newService->getDescription(),
-                'price' => (float)$newService->getPrice(),
-                'durationMinutes' => (int)$newService->getDurationMinutes(),
                 'isActive' => (bool)$newService->getIsActive(),
                 'createdAt' => $newService->getCreatedAt(),
                 'updatedAt' => $newService->getUpdatedAt(),
@@ -216,24 +196,6 @@ class ServiceController
         if (isset($data['description']) && is_string($data['description']) && !empty(trim($data['description']))) {
             $service->setDescription(trim($data['description']));
         }
-        if (isset($data['price'])) {
-            if (is_numeric($data['price']) && $data['price'] >= 0) {
-                $service->setPrice((float)$data['price']);
-            } else {
-                http_response_code(400);
-                echo json_encode(['status' => 'error', 'message' => 'Price must be a non-negative number if provided.']);
-                return;
-            }
-        }
-        if (isset($data['durationMinutes'])) {
-            if (is_int($data['durationMinutes']) && $data['durationMinutes'] >= 0) {
-                $service->setDurationMinutes((int)$data['durationMinutes']);
-            } else {
-                http_response_code(400);
-                echo json_encode(['status' => 'error', 'message' => 'Duration must be a non-negative integer if provided.']);
-                return;
-            }
-        }
         if (isset($data['isActive'])) {
             if (is_bool($data['isActive'])) {
                 $service->setIsActive((bool)$data['isActive']);
@@ -250,8 +212,6 @@ class ServiceController
                 'id' => $service->getId(),
                 'serviceName' => $service->getServiceName(),
                 'description' => $service->getDescription(),
-                'price' => (float)$service->getPrice(),
-                'durationMinutes' => (int)$service->getDurationMinutes(),
                 'isActive' => (bool)$service->getIsActive(),
                 'createdAt' => $service->getCreatedAt(),
                 'updatedAt' => $service->getUpdatedAt(),
