@@ -1,6 +1,11 @@
 // src/pages/Home.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Sustainability from '../../assets/images/sustainabilty.jpeg'
+import Quality from '../../assets/images/Quality.png';
+import Community from '../../assets/images/Community.png'
+import Hero from '../../assets/images/hero.jpeg';
+import About from '../../assets/images/about.png'
 
 const Home = () => {
   return (
@@ -8,7 +13,8 @@ const Home = () => {
       {/* Hero Section */}
       <section
         className="relative bg-cover bg-center bg-no-repeat py-20 md:py-32 lg:py-48 text-[#FFFFF0] flex items-center justify-center animate-fadeIn"
-        style={{ backgroundImage: "url('https://via.placeholder.com/1920x1080/4682B4/FFFFF0?text=Nananom+Farms+Palm+Oil+Field+Hero')" }}
+        style={{ backgroundImage: `url(${Hero})` }}
+
         // Replace with a real, high-quality image of a vibrant palm oil field or a broader farm landscape
       >
         <div className="absolute inset-0 bg-black opacity-60"></div> {/* Overlay for readability */}
@@ -42,7 +48,7 @@ const Home = () => {
           {/* Image Column */}
           <div className="md:w-1/2 mb-8 md:mb-0 animate-fadeInLeft">
             <img
-              src="https://via.placeholder.com/600x400/8A3324/FFFFF0?text=Ghanaian+Farmer+Image"
+              src={About}
               alt="Ghanaian farmer in a field"
               className="rounded-lg shadow-xl object-cover w-full h-auto"
               // Replace with a real, high-quality image of a Ghanaian farmer or agricultural scene
@@ -74,7 +80,7 @@ const Home = () => {
             {/* Value Image 1: Sustainability */}
             <div className="relative group w-full md:w-1/3 h-64 md:h-96 overflow-hidden animate-fadeIn" style={{ animationDelay: '1.0s' }}>
               <img
-                src="https://via.placeholder.com/800x600/6B8E23/FFFFF0?text=Sustainable+Farming" // Replace with a relevant image
+                src={Sustainability} // Replace with a relevant image
                 alt="Sustainable Farming"
                 className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-75"
               />
@@ -90,11 +96,11 @@ const Home = () => {
             {/* Value Image 2: Quality */}
             <div className="relative group w-full md:w-1/3 h-64 md:h-96 overflow-hidden animate-fadeIn" style={{ animationDelay: '1.2s' }}>
               <img
-                src="https://via.placeholder.com/800x600/CD853F/FFFFF0?text=Premium+Palm+Oil" // Replace with a relevant image
+                src={Quality} // Replace with a relevant image
                 alt="Premium Palm Oil Products"
                 className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-75"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-black bg-opacity-10 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <p className="text-white text-xl font-semibold text-center leading-relaxed">
                   Delivering only the finest palm oil products to our customers.
                 </p>
@@ -105,7 +111,7 @@ const Home = () => {
             {/* Value Image 3: Community */}
             <div className="relative group w-full md:w-1/3 h-64 md:h-96 overflow-hidden animate-fadeIn" style={{ animationDelay: '1.4s' }}>
               <img
-                src="https://via.placeholder.com/800x600/4CAF50/FFFFF0?text=Empowering+Community" // Replace with a relevant image
+                src={Community} // Replace with a relevant image
                 alt="Empowering Local Farmers"
                 className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-75"
               />

@@ -32,7 +32,9 @@ const api = async (endpoint, options = {}, requiresAuth = true) => {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api${endpoint}`, {
+    // FIX: Removed the redundant '/api' from the URL construction.
+    // The VITE_API_BASE_URL environment variable should now include '/api' if your backend uses it.
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...options,
       headers,
     });
