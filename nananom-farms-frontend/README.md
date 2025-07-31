@@ -83,7 +83,7 @@ Follow these steps to get the frontend application up and running on your local 
 
 The project follows a standard React application structure:
 
-````
+
 
 nananom-farms-frontend/
 ├── public/                \# Static assets (e.g., index.html, favicon)
@@ -105,7 +105,7 @@ nananom-farms-frontend/
 ├── postcss.config.js      \# PostCSS configuration for TailwindCSS
 └── README.md              \# This file
 
-```
+
 
 ## 7. Usage
 
