@@ -32,9 +32,14 @@ const api = async (endpoint, options = {}, requiresAuth = true) => {
   }
 
   try {
-    // FIX: Removed the redundant '/api' from the URL construction.
-    // The VITE_API_BASE_URL environment variable should now include '/api' if your backend uses it.
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    // *** THIS IS THE CRITICAL CHANGE IN THIS FILE ***
+    // We are re-adding '/api' here because:
+    // 1. Your .env's VITE_API_BASE_URL will be 'http://localhost:8080/Nananom/public'
+    // 2. Your backend routes start with '/api' (e.g., '/api/login')
+    // 3. Your backend's index.php will strip '/Nananom/public' from the incoming URI.
+    // So, 'http://localhost:8080/Nananom/public' + '/api' + '/login'
+    // results in 'http://localhost:8080/Nananom/public/api/login' which is what your backend expects
+    const response = await fetch(`${API_BASE_URL}/api${endpoint}`, {
       ...options,
       headers,
     });

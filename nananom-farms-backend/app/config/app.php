@@ -4,7 +4,8 @@
 
 // Define application constants or settings here
 define('APP_NAME', 'Nananom Farms API');
-define('BASE_URL', 'http://localhost/Nananom/public');
+// CORRECTED: Added the port 8080 to BASE_URL to match your server's actual address.
+define('BASE_URL', 'http://localhost:8080/Nananom/public/'); // <-- Added ':8080' and a trailing slash for consistency
 
 // Error reporting settings (for development, set to E_ALL)
 error_reporting(E_ALL);
