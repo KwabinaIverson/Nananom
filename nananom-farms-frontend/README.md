@@ -86,23 +86,61 @@ The project follows a standard React application structure:
 
 
 nananom-farms-frontend/
+
+
 ├── public/                \# Static assets (e.g., index.html, favicon)
+
+
 ├── src/
+
+
 │   ├── assets/            \# Images, icons, fonts
+
+
+
+
 │   ├── components/        \# Reusable UI components (e.g., Card, Sidebar)
+
+
 │   ├── pages/             \# Main application pages (e.g., Login, Dashboard, NotFound)
+
+
 │   │   ├── Auth/          \# Login and related authentication pages
+
+
 │   │   ├── Dashboard/     \# Admin, Agent, Customer dashboards
+
+
 │   │   └── ...
+
+
 │   ├── services/          \# API calls, authentication logic (e.g., auth.js)
+
+
 │   ├── routes/            \# Centralized route definitions (e.g., AppRoutes.jsx)
+
+
 │   ├── App.jsx            \# Main application component
+
+
 │   ├── main.jsx           \# Entry point for the React app
+
+
 │   ├── index.css          \# Global CSS, TailwindCSS directives
+
+
 │   └── tailwind.config.js \# Tailwind CSS configuration
+
+
 ├── .gitignore             \# Specifies intentionally untracked files to ignore
+
+
 ├── package.json           \# Project metadata and dependencies
+
+
 ├── postcss.config.js      \# PostCSS configuration for TailwindCSS
+
+
 └── README.md              \# This file
 
 
