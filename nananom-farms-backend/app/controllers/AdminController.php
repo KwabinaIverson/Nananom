@@ -155,6 +155,16 @@ class AdminController
             return;
         }
 
+        // New password complexity check: at least one uppercase, one lowercase, one digit, one special char
+        if (!preg_match('/[A-Z]/', $password) ||
+            !preg_match('/[a-z]/', $password) ||
+            !preg_match('/\d/', $password) ||
+            !preg_match('/[\W_]/', $password)) {
+            http_response_code(400);
+            echo json_encode(['status' => 'error', 'message' => 'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.']);
+            return;
+        }
+
         if (User::findByEmail($email)) {
             http_response_code(409);
             echo json_encode(['status' => 'error', 'message' => 'Email already registered.']);
@@ -206,17 +216,22 @@ class AdminController
     public function listUsers(): void
     {
         $users = User::all();
-        $usersWithRoles = [];
+        $roles = Role::all();
+        $roleMap = [];
+        foreach ($roles as $role) {
+            $roleMap[$role->getId()] = $role->getRoleName();
+        }
 
+        $usersWithRoles = [];
         foreach ($users as $user) {
-            $role = Role::find($user->getRoleId());
+            $roleName = $roleMap[$user->getRoleId()] ?? 'Unknown';
             $usersWithRoles[] = [
                 'id' => $user->getId(),
                 'firstName' => $user->getFirstName(),
                 'lastName' => $user->getLastName(),
                 'email' => $user->getEmail(),
                 'phoneNumber' => $user->getPhoneNumber(),
-                'roleName' => $role ? $role->getRoleName() : 'Unknown',
+                'roleName' => $roleName,
                 'createdAt' => $user->getCreatedAt(),
                 'updatedAt' => $user->getUpdatedAt(),
             ];

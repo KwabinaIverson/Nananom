@@ -30,8 +30,11 @@ $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
 // The regular expression extracts the actual token string.
 if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
     $jwt = $matches[1]; // The captured JWT token
-    // Log for debugging purposes: token found.
-    error_log("DEBUG: " . date('Y-m-d H:i:s') . " JWT found in Authorization header. Attempting validation.");
+   // Log for debugging purposes: token found.
+   // Consider using a proper logger with configurable levels
+   if (defined('APP_DEBUG') && APP_DEBUG) {
+       error_log("DEBUG: " . date('Y-m-d H:i:s') . " JWT found in Authorization header. Attempting validation.");
+   }
 
     // Validate the token using the AuthManager.
     $payload = AuthManager::validateToken($jwt);
@@ -56,12 +59,14 @@ if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
 // This tells the client that the server will respond with JSON data.
 header("Content-type: application/json; charset=UTF-8");
 
-// Set CORS headers to allow requests from any origin.
-// In a production environment, you should restrict '*' to your frontend's domain.
-header("Access-Control-Allow-Origin: *");
+// Set CORS headers based on environment
+$allowedOrigins = defined('ALLOWED_ORIGINS') ? ALLOWED_ORIGINS : ['http://localhost:3000'];
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: " . $origin);
+}
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
-
 // Handle OPTIONS requests (pre-flight for CORS).
 // Browsers send an OPTIONS request before actual PUT/POST/DELETE requests.
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -96,12 +101,11 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     // Admin-specific service routes (might require authentication/authorization checks in controller)
     $r->addRoute('POST', '/api/admin/services', 'ServiceController@createService');
     $r->addRoute('PUT', '/api/admin/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@updateService');
-    $r->addRoute('DELETE', '/api/admin/services/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'ServiceController@deleteService');
-
+    $r->addRoute('POST', '/api/enquiries', 'EnquiryController@createEnquiry');
     // API Routes for Enquiries (assuming UUIDs for IDs)
     $r->addRoute('GET', '/api/enquiries', 'EnquiryController@getEnquiries');
     $r->addRoute('GET', '/api/enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@getEnquiry');
-    $r->addRoute('POST', '/api/create_enquiries', 'EnquiryController@createEnquiry');
+    $r->addRoute('POST', '/api/enquiries', 'EnquiryController@createEnquiry');
     $r->addRoute('PUT', '/api/enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@update');
     $r->addRoute('DELETE', '/api/enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@delete');
 
@@ -177,18 +181,28 @@ switch ($routeInfo[0]) {
             if (method_exists($controller, $methodName)) {
                 // Call the controller method with extracted route variables.
                 // This is where your actual API logic in the controller gets executed.
-                call_user_func_array([$controller, $methodName], $vars);
-            } else {
-                // Controller method not found (shouldn't happen if routes are correct).
+                try {
+                // Instantiate the controller.
+                $controller = new $controllerClass();
+            } catch (Exception $e) {
                 http_response_code(500);
-                echo json_encode(['status' => 'error', 'message' => 'Controller method not found.']);
+                echo json_encode(['status' => 'error', 'message' => 'Controller instantiation failed.']);
+                break;
             }
+
+            // Call the controller method with extracted route variables.
+            call_user_func_array([$controller, $methodName], $vars);
         } else {
-            // Controller class not found (typo in route definition or class name).
+            // Controller method not found (shouldn't happen if routes are correct).
             http_response_code(500);
-            echo json_encode(['status' => 'error', 'message' => 'Controller class not found.']);
+            echo json_encode(['status' => 'error', 'message' => 'Controller method not found.']);
         }
-        break;
+    } else {
+        // Controller class not found (typo in route definition or class name).
+        http_response_code(500);
+        echo json_encode(['status' => 'error', 'message' => 'Controller class not found.']);
+    }
+    break;
 }
 
 ?>

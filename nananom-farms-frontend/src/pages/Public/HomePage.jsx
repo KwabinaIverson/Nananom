@@ -7,7 +7,17 @@ import Community from '../../assets/images/Community.png'
 import Hero from '../../assets/images/hero.jpeg';
 import About from '../../assets/images/about.png'
 
-const Home = () => {
+// New imports for service images (replace with your actual image paths)
+// Make sure these paths are correct relative to your Home.jsx file
+import PalmOilProductImage from '../../assets/images/about.png'; // Placeholder - replace with a real image
+import AgriculturalConsultingImage from '../../assets/images/about.png'; // Placeholder - replace with a real image
+import FarmEquipmentRentalImage from '../../assets/images/about.png'; // Placeholder - replace with a real image
+import TrainingWorkshopImage from '../../assets/images/about.png'; // Placeholder - replace with a real image
+import LogisticsDistributionImage from '../../assets/images/about.png'; // Placeholder - replace with a real image
+import ResearchSupportImage from '../../assets/images/about.png'; // Placeholder - replace with a real image
+
+
+const HomePage = () => {
   return (
     <div className="min-h-screen bg-[#F2F4F5] font-sans">
       {/* Hero Section */}
@@ -84,7 +94,11 @@ const Home = () => {
                 alt="Sustainable Farming"
                 className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-75"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0
+              bg-black/70 backdrop-blur-sm backdrop-brightness-75
+              opacity-0 group-hover:opacity-100
+              transition-opacity duration-300
+              flex items-center justify-center p-4">
                 <p className="text-white text-xl font-semibold text-center leading-relaxed">
                   Committed to eco-friendly farming and responsible resource management.
                 </p>
@@ -100,7 +114,11 @@ const Home = () => {
                 alt="Premium Palm Oil Products"
                 className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-75"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-10 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0
+              bg-black/50 backdrop-blur-sm backdrop-brightness-75
+              opacity-0 group-hover:opacity-100
+              transition-opacity duration-300
+              flex items-center justify-center p-4">
                 <p className="text-white text-xl font-semibold text-center leading-relaxed">
                   Delivering only the finest palm oil products to our customers.
                 </p>
@@ -115,7 +133,11 @@ const Home = () => {
                 alt="Empowering Local Farmers"
                 className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-75"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0
+              bg-black/50 backdrop-blur-sm backdrop-brightness-75
+              opacity-0 group-hover:opacity-100
+              transition-opacity duration-300
+              flex items-center justify-center p-4">
                 <p className="text-white text-xl font-semibold text-center leading-relaxed">
                   Empowering local farmers and contributing to regional food security.
                 </p>
@@ -127,84 +149,158 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Main Services Grid */}
+      {/* Main Services Section - REVISED TO MATCH IMAGE_AF16A7.JPG LAYOUT */}
       <section className="py-16 md:py-24 bg-[#F2F4F5]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-[#4682B4] text-center mb-12 animate-slideInDown" style={{ animationDelay: '1.6s' }}>
             Our Core Offerings
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-col gap-10"> {/* Changed to flex column for stacking cards */}
+
             {/* Service Card 1: Premium Palm Oil Products */}
-            <div className="bg-[#FFFFF0] p-6 rounded-lg shadow-md border border-[#EAA221] hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center animate-fadeInUp" style={{ animationDelay: '1.8s' }}>
-              <div className="bg-[#4682B4] p-3 rounded-full inline-block mb-4">
-                <svg className="w-10 h-10 text-[#FFFFF0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2-2m-2 2l-2 2M12 8l-2 2m2-2l2 2M12 18h.01M12 12h.01M12 6h.01M6 12h.01M18 12h.01"></path></svg>
+            <div className="bg-[#FFFFF0] rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row items-center animate-fadeInUp" style={{ animationDelay: '1.8s' }}>
+              <div className="md:w-1/3 w-full h-60 md:h-auto overflow-hidden"> {/* Image container */}
+                <img
+                  src={PalmOilProductImage} // Use your actual image here
+                  alt="Premium Palm Oil Products"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h3 className="text-xl font-semibold text-[#4682B4] mb-3">Premium Palm Oil Products</h3>
-              <p className="text-[#2F4F4F]">
-                We produce and supply high-quality palm oil, extracted and processed using
-                sustainable methods to ensure purity, richness, and compliance with global standards.
-              </p>
+              <div className="md:w-2/3 w-full p-6 text-center md:text-left flex flex-col justify-center"> {/* Content container */}
+                <h3 className="text-2xl font-bold text-[#4682B4] mb-3">Premium Palm Oil Products</h3>
+                <p className="text-lg text-[#2F4F4F] leading-relaxed mb-4">
+                  We produce and supply high-quality palm oil, extracted and processed using
+                  sustainable methods to ensure purity, richness, and compliance with global standards.
+                </p>
+                <Link
+                  to="/services/palm-oil-products"
+                  className="inline-block self-center md:self-start bg-[#EAA221] hover:bg-[#4682B4] text-[#2F4F4F] hover:text-[#FFFFF0] font-bold py-2 px-6 rounded-full shadow transition duration-300 ease-in-out transform hover:scale-105 text-md"
+                >
+                  Learn More
+                </Link>
+              </div>
             </div>
 
             {/* Service Card 2: Agricultural Consulting */}
-            <div className="bg-[#FFFFF0] p-6 rounded-lg shadow-md border border-[#EAA221] hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center animate-fadeInUp" style={{ animationDelay: '2.0s' }}>
-              <div className="bg-[#4682B4] p-3 rounded-full inline-block mb-4">
-                <svg className="w-10 h-10 text-[#FFFFF0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M15 10V5.729a2 2 0 00-2.14-1.956L12 3m-2 2.729V10m-2 2h8m-8 0v8a2 2 0 002 2h4a2 2 0 002-2v-8m-8 0h8"></path></svg>
+            <div className="bg-[#FFFFF0] rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row items-center animate-fadeInUp" style={{ animationDelay: '2.0s' }}>
+              <div className="md:w-2/3 w-full p-6 text-center md:text-left flex flex-col justify-center">
+                <h3 className="text-2xl font-bold text-[#4682B4] mb-3">Agricultural Consulting</h3>
+                <p className="text-lg text-[#2F4F4F] leading-relaxed mb-4">
+                  Our experienced agronomists provide tailored advice on crop rotation,
+                  pest management, soil fertility, and best farming practices to maximize your yield.
+                </p>
+                <Link
+                  to="/services/agricultural-consulting"
+                  className="inline-block self-center md:self-start bg-[#EAA221] hover:bg-[#4682B4] text-[#2F4F4F] hover:text-[#FFFFF0] font-bold py-2 px-6 rounded-full shadow transition duration-300 ease-in-out transform hover:scale-105 text-md"
+                >
+                  Learn More
+                </Link>
               </div>
-              <h3 className="text-xl font-semibold text-[#4682B4] mb-3">Agricultural Consulting</h3>
-              <p className="text-[#2F4F4F]">
-                Our experienced agronomists provide tailored advice on crop rotation,
-                pest management, soil fertility, and best farming practices to maximize your yield.
-              </p>
+              <div className="md:w-1/3 w-full h-60 md:h-auto overflow-hidden">
+                <img
+                  src={AgriculturalConsultingImage} // Use your actual image here
+                  alt="Agricultural Consulting"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
 
             {/* Service Card 3: Farm Equipment Rentals */}
-            <div className="bg-[#FFFFF0] p-6 rounded-lg shadow-md border border-[#EAA221] hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center animate-fadeInUp" style={{ animationDelay: '2.2s' }}>
-              <div className="bg-[#4682B4] p-3 rounded-full inline-block mb-4">
-                <svg className="w-10 h-10 text-[#FFFFF0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V6m3 6v.01M18 18a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V6"></path></svg>
+            <div className="bg-[#FFFFF0] rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row items-center animate-fadeInUp" style={{ animationDelay: '2.2s' }}>
+              <div className="md:w-1/3 w-full h-60 md:h-auto overflow-hidden">
+                <img
+                  src={FarmEquipmentRentalImage} // Use your actual image here
+                  alt="Farm Equipment Rentals"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h3 className="text-xl font-semibold text-[#4682B4] mb-3">Farm Equipment Rentals</h3>
-              <p className="text-[#2F4F4F]">
-                Access a wide range of modern, well-maintained farm machinery,
-                available for rent to help you execute farming tasks efficiently and cost-effectively.
-              </p>
+              <div className="md:w-2/3 w-full p-6 text-center md:text-left flex flex-col justify-center">
+                <h3 className="text-2xl font-bold text-[#4682B4] mb-3">Farm Equipment Rentals</h3>
+                <p className="text-lg text-[#2F4F4F] leading-relaxed mb-4">
+                  Access a wide range of modern, well-maintained farm machinery,
+                  available for rent to help you execute farming tasks efficiently and cost-effectively.
+                </p>
+                <Link
+                  to="/services/equipment-rentals"
+                  className="inline-block self-center md:self-start bg-[#EAA221] hover:bg-[#4682B4] text-[#2F4F4F] hover:text-[#FFFFF0] font-bold py-2 px-6 rounded-full shadow transition duration-300 ease-in-out transform hover:scale-105 text-md"
+                >
+                  Learn More
+                </Link>
+              </div>
             </div>
 
             {/* Service Card 4: Training Workshops */}
-            <div className="bg-[#FFFFF0] p-6 rounded-lg shadow-md border border-[#EAA221] hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center animate-fadeInUp" style={{ animationDelay: '2.4s' }}>
-              <div className="bg-[#4682B4] p-3 rounded-full inline-block mb-4">
-                <svg className="w-10 h-10 text-[#FFFFF0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253M12 6.253c1.168.776 2.754 1.253 4.5 1.253S19.832 7.029 21 6.253m-18 13c1.168.776 2.754 1.253 4.5 1.253s3.332-.477 4.5-1.253m-18 0V9.5m0 0v1.11m0-1.11c0 2.667 3 3.75 3 3.75S7 9.5 7 9.5m7 3.5c0 2.667 3 3.75 3 3.75S17 9.5 17 9.5M3 12a2 2 0 110-4 2 2 0 010 4zm18 0a2 2 0 110-4 2 2 0 010 4zM4.5 19.253V18l.001-.001C5.333 19.012 6.5 20 7.5 20s2.167-.988 3-1.747L12 18v1.253c1.168.776 2.754 1.253 4.5 1.253s3.332-.477 4.5-1.253V18l.001-.001c.833.988 2 1.747 3 1.747s2.167-.988 3-1.747L21 18v1.253"></path></svg>
+            <div className="bg-[#FFFFF0] rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row items-center animate-fadeInUp" style={{ animationDelay: '2.4s' }}>
+              <div className="md:w-2/3 w-full p-6 text-center md:text-left flex flex-col justify-center">
+                <h3 className="text-2xl font-bold text-[#4682B4] mb-3">Training Workshops</h3>
+                <p className="text-lg text-[#2F4F4F] leading-relaxed mb-4">
+                  We conduct regular workshops and seminars to educate farmers on modern agricultural
+                  techniques, pest control, irrigation, and post-harvest management.
+                </p>
+                <Link
+                  to="/services/training-workshops"
+                  className="inline-block self-center md:self-start bg-[#EAA221] hover:bg-[#4682B4] text-[#2F4F4F] hover:text-[#FFFFF0] font-bold py-2 px-6 rounded-full shadow transition duration-300 ease-in-out transform hover:scale-105 text-md"
+                >
+                  Learn More
+                </Link>
               </div>
-              <h3 className="text-xl font-semibold text-[#4682B4] mb-3">Training Workshops</h3>
-              <p className="text-[#2F4F4F]">
-                We conduct regular workshops and seminars to educate farmers on modern agricultural
-                techniques, pest control, irrigation, and post-harvest management.
-              </p>
+              <div className="md:w-1/3 w-full h-60 md:h-auto overflow-hidden">
+                <img
+                  src={TrainingWorkshopImage} // Use your actual image here
+                  alt="Training Workshops"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
 
             {/* Service Card 5: Logistics & Distribution */}
-            <div className="bg-[#FFFFF0] p-6 rounded-lg shadow-md border border-[#EAA221] hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center animate-fadeInUp" style={{ animationDelay: '2.6s' }}>
-              <div className="bg-[#4682B4] p-3 rounded-full inline-block mb-4">
-                <svg className="w-10 h-10 text-[#FFFFF0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10v11m0 0h8m-8 0L9 17m-3 4V3m0 0h8m-8 0L9 7m-3 4v10m6-10V3m0 0h8m-8 0L15 7m-3 4v10m6-10V3m0 0h8m-8 0L21 7"></path></svg>
+            <div className="bg-[#FFFFF0] rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row items-center animate-fadeInUp" style={{ animationDelay: '2.6s' }}>
+              <div className="md:w-1/3 w-full h-60 md:h-auto overflow-hidden">
+                <img
+                  src={LogisticsDistributionImage} // Use your actual image here
+                  alt="Logistics & Distribution"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h3 className="text-xl font-semibold text-[#4682B4] mb-3">Logistics & Distribution</h3>
-              <p className="text-[#2F4F4F]">
-                Ensuring timely and efficient delivery of our palm oil products from the farm to your
-                market or facility, maintaining quality throughout the supply chain.
-              </p>
+              <div className="md:w-2/3 w-full p-6 text-center md:text-left flex flex-col justify-center">
+                <h3 className="text-2xl font-bold text-[#4682B4] mb-3">Logistics & Distribution</h3>
+                <p className="text-lg text-[#2F4F4F] leading-relaxed mb-4">
+                  Ensuring timely and efficient delivery of our palm oil products from the farm to your
+                  market or facility, maintaining quality throughout the supply chain.
+                </p>
+                <Link
+                  to="/services/logistics-distribution"
+                  className="inline-block self-center md:self-start bg-[#EAA221] hover:bg-[#4682B4] text-[#2F4F4F] hover:text-[#FFFFF0] font-bold py-2 px-6 rounded-full shadow transition duration-300 ease-in-out transform hover:scale-105 text-md"
+                >
+                  Learn More
+                </Link>
+              </div>
             </div>
 
             {/* Service Card 6: Agricultural Research Support */}
-            <div className="bg-[#FFFFF0] p-6 rounded-lg shadow-md border border-[#EAA221] hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center animate-fadeInUp" style={{ animationDelay: '2.8s' }}>
-              <div className="bg-[#4682B4] p-3 rounded-full inline-block mb-4">
-                <svg className="w-10 h-10 text-[#FFFFF0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 4a2 2 0 100 4m-3.939 1.579a2 2 0 113.15 1.414L10 14l-1 1-3 3-1 1-3 3"></path></svg>
+            <div className="bg-[#FFFFF0] rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row items-center animate-fadeInUp" style={{ animationDelay: '2.8s' }}>
+              <div className="md:w-2/3 w-full p-6 text-center md:text-left flex flex-col justify-center">
+                <h3 className="text-2xl font-bold text-[#4682B4] mb-3">Agricultural Research Support</h3>
+                <p className="text-lg text-[#2F4F4F] leading-relaxed mb-4">
+                  We actively support and collaborate on agricultural research initiatives aimed at
+                  developing new crop varieties, improving farming techniques, and enhancing sustainability.
+                </p>
+                <Link
+                  to="/services/research-support"
+                  className="inline-block self-center md:self-start bg-[#EAA221] hover:bg-[#4682B4] text-[#2F4F4F] hover:text-[#FFFFF0] font-bold py-2 px-6 rounded-full shadow transition duration-300 ease-in-out transform hover:scale-105 text-md"
+                >
+                  Learn More
+                </Link>
               </div>
-              <h3 className="text-xl font-semibold text-[#4682B4] mb-3">Agricultural Research Support</h3>
-              <p className="text-[#2F4F4F]">
-                We actively support and collaborate on agricultural research initiatives aimed at
-                developing new crop varieties, improving farming techniques, and enhancing sustainability.
-              </p>
+              <div className="md:w-1/3 w-full h-60 md:h-auto overflow-hidden">
+                <img
+                  src={ResearchSupportImage} // Use your actual image here
+                  alt="Agricultural Research Support"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -228,4 +324,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
