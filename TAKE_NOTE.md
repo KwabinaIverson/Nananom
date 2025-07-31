@@ -1,6 +1,3 @@
-Okay, this is a great idea to document the changes and provide clear instructions for the backend developer.
-
-Here's a comprehensive Markdown document outlining the recent updates and the necessary backend tasks.
 
 -----
 
