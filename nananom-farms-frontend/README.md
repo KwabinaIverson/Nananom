@@ -93,8 +93,10 @@ nananom-farms-frontend/
 │   ├── pages/             \# Main application pages (e.g., Login, Dashboard, NotFound)
 │   │   ├── Auth/          \# Login and related authentication pages
 │   │   ├── Dashboard/     \# Admin, Agent, Customer dashboards
-│   │   └── ...
+│   │   └── Customer
+|   |   ├── Public/        \# AboutPage, EnquiryPAge, HomePage, ContactPage,NotFound,ServicesPage
 │   ├── services/          \# API calls, authentication logic (e.g., auth.js)
+|   ├── utils
 │   ├── routes/            \# Centralized route definitions (e.g., AppRoutes.jsx)
 │   ├── App.jsx            \# Main application component
 │   ├── main.jsx           \# Entry point for the React app
