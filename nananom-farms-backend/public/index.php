@@ -12,6 +12,18 @@ require_once APP_ROOT . '/app/config/database.php';
 require_once APP_ROOT . '/app/config/app.php';
 
 
+// Enable CORS
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// Handle preflight (OPTIONS) request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+
 use App\Core\AuthManager;
 
 // Get the Authorization header

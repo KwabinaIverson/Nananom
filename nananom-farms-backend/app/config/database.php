@@ -13,7 +13,7 @@ return [
     'port'    => '3306',
     'dbname'  => 'nananom_farm',
     'user'    => 'root',
-    'pass'    => '',
+    'pass'    => 'Lisa6131queen',
     'charset' => 'utf8mb4'
 ];
 
