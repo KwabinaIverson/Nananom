@@ -139,7 +139,9 @@ class AuthController
             echo json_encode([
                 'status' => 'success',
                 'message' => 'Login successful.',
-                'token' => $jwt
+                'token' => $jwt,
+                'role' => $role->getRoleName(),
+                'userId' => $user->getId()
             ]);
         } else {
             http_response_code(401);

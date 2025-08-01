@@ -12,6 +12,17 @@ require_once APP_ROOT . '/app/config/database.php';
 require_once APP_ROOT . '/app/config/app.php';
 
 
+// Enable CORS
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+
 use App\Core\AuthManager;
 
 // Get the Authorization header
@@ -53,10 +64,10 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
     // --- API Routes for Appointments ---
     $r->addRoute('GET', '/api/appointments', 'AppointmentController@getAppointments');
-    $r->addRoute('GET', '/api/appointments/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'AppointmentController@getAppointment');
+    $r->addRoute('GET', '/api/create_appointments/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'AppointmentController@getAppointment');
     $r->addRoute('POST', '/api/appointments', 'AppointmentController@createAppointment');
-    $r->addRoute('PUT', '/api/appointments/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'AppointmentController@updateAppointment');
-    $r->addRoute('DELETE', '/api/appointments/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'AppointmentController@deleteAppointment');
+    $r->addRoute('PUT', '/api/update_appointments/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'AppointmentController@updateAppointment');
+    $r->addRoute('DELETE', '/api/delete_appointments/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'AppointmentController@deleteAppointment');
 
 
 
@@ -70,10 +81,10 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
     // --- API Routes for Enquiries ---
     $r->addRoute('GET', '/api/enquiries', 'EnquiryController@getEnquiries');
-    $r->addRoute('GET', '/api/enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@getEnquiry');
+    $r->addRoute('GET', '/api/get_enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@getEnquiry');
     $r->addRoute('POST', '/api/create_enquiries', 'EnquiryController@createEnquiry');
-    $r->addRoute('PUT', '/api/enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@update');
-    $r->addRoute('DELETE', '/api/enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@delete');
+    $r->addRoute('PUT', '/api/update_enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@update');
+    $r->addRoute('DELETE', '/api/delete_enquiries/{id:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', 'EnquiryController@delete');
 
 
 

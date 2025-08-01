@@ -5,7 +5,7 @@ import { get, post, put, del } from './api'; // Ensure 'api' is correctly import
 export const getAllAppointments = async () => {
   try {
     // Assuming backend handles role-based filtering for 'all' vs 'own'
-    const data = await get('/appointments');
+    const data = await get('/api/appointments');
     return data;
   } catch (error) {
     console.error('Error fetching all appointments:', error.message);
@@ -16,7 +16,7 @@ export const getAllAppointments = async () => {
 // All roles - Get appointment by ID
 export const getAppointmentById = async (id) => {
   try {
-    const data = await get(`/appointments/${id}`);
+    const data = await get(`/api/appointments/${id}`);
     return data;
   } catch (error) {
     console.error(`Error fetching appointment with ID ${id}:`, error.message);
@@ -27,7 +27,7 @@ export const getAppointmentById = async (id) => {
 // All roles - Book a new appointment (typically done by customer)
 export const createAppointment = async (appointmentData) => {
   try {
-    const data = await post('/appointments', appointmentData);
+    const data = await post('/api/create_appointments', appointmentData);
     return data;
   } catch (error) {
     console.error('Error creating appointment:', error.message);
@@ -38,7 +38,7 @@ export const createAppointment = async (appointmentData) => {
 // Admin, Support Agent - Update an appointment (e.g., change status)
 export const updateAppointment = async (id, appointmentData) => {
   try {
-    const data = await put(`/appointments/${id}`, appointmentData);
+    const data = await put(`/api/update_appointments/${id}`, appointmentData);
     return data;
   } catch (error) {
     console.error('Error updating appointment:', error.message);
@@ -49,7 +49,7 @@ export const updateAppointment = async (id, appointmentData) => {
 // Admin, Support Agent - Delete an appointment
 export const deleteAppointment = async (id) => {
   try {
-    const data = await del(`/appointments/${id}`);
+    const data = await del(`api/delete_appointments/${id}`);
     return data;
   } catch (error) {
     console.error(`Error deleting appointment with ID ${id}:`, error.message);

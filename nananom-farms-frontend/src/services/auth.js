@@ -64,7 +64,7 @@ export const loginUser = async (credentials) => {
     // Use the 'post' function from api.js.
     // The last argument 'false' means: do NOT include an Authorization header,
     // as the user is not yet logged in.
-    const response = await post('/login', credentials, {}, false);
+    const response = await post('/api/login', credentials, {}, false);
 
     // Backend should return token, role, and userId on successful login.
     if (response && response.token && response.role && response.userId) {
@@ -93,7 +93,7 @@ export const registerUser = async (userData) => {
   try {
     // Use the 'post' function from api.js.
     // Assuming registration does not require a token for the request itself.
-    const response = await post('/register', userData, {}, false);
+    const response = await post('/api/register', userData, {}, false);
     return response;
   } catch (error) {
     console.error('Error during registration:', error.message);

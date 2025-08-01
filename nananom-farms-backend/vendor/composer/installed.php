@@ -3,7 +3,7 @@
         'name' => 'nananom_farm/nananom',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c8851be4b650904a011516b21c067f65a74f78d4',
+        'reference' => 'f8549bf425c3d1f6f1411c903aa8a99d88ba3785',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -40,7 +40,7 @@
         'nananom_farm/nananom' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c8851be4b650904a011516b21c067f65a74f78d4',
+            'reference' => 'f8549bf425c3d1f6f1411c903aa8a99d88ba3785',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

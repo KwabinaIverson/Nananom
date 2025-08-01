@@ -1,6 +1,6 @@
 // src/services/api.js
 import { getToken, logoutUser } from './auth'; // Assuming auth.js now only stores/retrieves token
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Get base URL from Vite env
+const API_BASE_URL = 'http://localhost:8080/Nananom/public'; // Get base URL from Vite env
 
 /**
  * Custom fetch wrapper to handle API requests, including JWT authorization.
