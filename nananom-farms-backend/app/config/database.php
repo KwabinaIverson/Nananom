@@ -11,7 +11,7 @@
 return [
     'host'    => 'localhost',
     'port'    => '3306',
-    'dbname'  => 'nananom_farm',
+    'dbname'  => 'nananom_farms',
     'user'    => 'root',
     'pass'    => 'Lisa6131queen',
     'charset' => 'utf8mb4'

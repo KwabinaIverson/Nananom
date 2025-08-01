@@ -47,9 +47,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F2F4F5] p-4 font-sans">
-      <div className="w-full max-w-md bg-[#FFFFF0] p-8 rounded-xl shadow-lg border-2 border-[#EAA221] animate-popIn">
-        <h1 className="text-4xl font-extrabold text-center text-[#4682B4] mb-8">Welcome Back!</h1>
+    <div className="min-h-screen flex items-center justify-center bg-[#DAD7CD] p-4 font-sans"> {/* Soft Clay for main background */}
+      <div className="w-full max-w-md bg-[#DAD7CD] p-8 rounded-xl shadow-lg border-2 border-[#FFB703] animate-popIn"> {/* Soft Clay for card background, Golden Wheat border */}
+        <h1 className="text-4xl font-extrabold text-center text-[##086920] mb-8">Welcome Back!</h1> {/* Primary Green for heading */}
 
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-5 py-3 rounded-lg relative mb-6 shadow-md" role="alert">
@@ -60,12 +60,12 @@ const LoginPage = () => {
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="block text-base font-semibold text-[#2F4F4F] mb-2">Email Address</label>
+            <label htmlFor="email" className="block text-base font-semibold text-[#2F2F2F] mb-2">Email Address</label> {/* Dark Charcoal for labels */}
             <input
               type="email"
               id="email"
               name="email"
-              className="mt-1 block w-full px-4 py-2 border border-[#4682B4] rounded-lg shadow-sm focus:ring-[#EAA221] focus:border-[#EAA221] text-[#2F4F4F] placeholder-[#4682B4] bg-white transition-all duration-300 ease-in-out hover:border-[#EAA221]"
+              className="mt-1 block w-full px-4 py-2 border border-[##086920] rounded-lg shadow-sm focus:ring-[#FFB703] focus:border-[#FFB703] text-[#2F2F2F] placeholder-[##086920] bg-white transition-all duration-300 ease-in-out hover:border-[#FFB703]" /* Primary Green border, Golden Wheat focus/hover, Dark Charcoal text, Primary Green placeholder */
               placeholder="you@nananomfarms.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -73,12 +73,12 @@ const LoginPage = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-base font-semibold text-[#2F4F4F] mb-2">Password</label>
+            <label htmlFor="password" className="block text-base font-semibold text-[#2F2F2F] mb-2">Password</label> {/* Dark Charcoal for labels */}
             <input
               type="password"
               id="password"
               name="password"
-              className="mt-1 block w-full px-4 py-2 border border-[#4682B4] rounded-lg shadow-sm focus:ring-[#EAA221] focus:border-[#EAA221] text-[#2F4F4F] placeholder-[#4682B4] bg-white transition-all duration-300 ease-in-out hover:border-[#EAA221]"
+              className="mt-1 block w-full px-4 py-2 border border-[##086920] rounded-lg shadow-sm focus:ring-[#FFB703] focus:border-[#FFB703] text-[#2F2F2F] placeholder-[##086920] bg-white transition-all duration-300 ease-in-out hover:border-[#FFB703]" /* Primary Green border, Golden Wheat focus/hover, Dark Charcoal text, Primary Green placeholder */
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -87,7 +87,7 @@ const LoginPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-[#EAA221] text-[#2F4F4F] p-3 rounded-lg font-bold text-lg hover:bg-[#4682B4] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#EAA221] focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+            className="w-full bg-[#FFB703] text-[#2F2F2F] p-3 rounded-lg font-bold text-lg hover:bg-[##086920] hover:text-[#FFFFFF] transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#086920] focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100" /* Golden Wheat background, Dark Charcoal text. Hover to Primary Green background, Pure White text. Golden Wheat focus ring. */
             disabled={loading}
           >
             {loading ? (
@@ -104,9 +104,9 @@ const LoginPage = () => {
           </button>
         </form>
 
-        <p className="mt-8 text-center text-base text-[#2F4F4F]">
+        <p className="mt-8 text-center text-base text-[#2F2F2F]"> {/* Dark Charcoal for text */}
           Don't have an account?{' '}
-          <Link to="/register" className="font-semibold text-[#4682B4] hover:text-[#8A3324] hover:underline transition-colors duration-300">
+          <Link to="/register" className="font-semibold text-[##086920] hover:text-[#FFB703] hover:underline transition-colors duration-300"> {/* Primary Green link, Golden Wheat on hover */}
             Register here
           </Link>
         </p>
